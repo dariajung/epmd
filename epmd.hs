@@ -2,24 +2,26 @@ module EPMD where
 
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as BC
+import qualified Data.Char as C
 import Data.Word
 import Network
 
-data MessageId = MessageId Char
+data MessageId = MessageId {
+    num :: Int
+    , char :: Char       
+} deriving Show
 
-_ALIVE2_REQ  = MessageId 'x' -- 120
-_ALIVE2_RESP = MessageId 'y' -- 121
+-- Registration and queries
+_ALIVE2_REQ         = MessageId { num = 120, char = 'x' } -- 120
+_ALIVE2_RESP        = MessageId { num = 121, char = 'y' } -- 121
+_PORT_PLEASE2_REQ   = MessageId { num = 122, char = 'z' } -- 122
+_PORT2_RESP         = MessageId { num = 119, char = 'w' } -- 119
+_NAMES_REQ          = MessageId { num = 110, char = 'n' } -- 110
 
-_PORT_PLEASE2_REQ = MessageId 'z' -- 122
-_PORT2_RESP       = MessageId 'w' -- 119
-
-_NAMES_REQ = MessageId 'n' -- 110
-
-_STOP_REQ = MessageId 's' -- 115
-
-_DUMP_REQ = MessageId 'd' -- 100
-
-_KILL_REQ = MessageId 'k' -- 107
+-- Interactive client command codes
+_STOP_REQ = MessageId { num = 115, char = 's' } -- 115
+_DUMP_REQ = MessageId { num = 100, char = 'd' } -- 100
+_KILL_REQ = MessageId { num = 107, char = 'k' } -- 107
 
 data NodeInfo = NodeInfo { 
     fullName :: String
@@ -32,7 +34,7 @@ data NodeInfo = NodeInfo {
     , lowVsn :: Word16
     , extra :: [B.ByteString]
     , creation :: Word16
-}
+} deriving (Show)
 
 -- sends a message to EPMD when node is started
 -- alive2_req 
