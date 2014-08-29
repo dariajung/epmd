@@ -7,7 +7,7 @@ defmodule Epmd.Supervisor do
 
     def init(_opt) do 
         children = [
-            worker(Epmd, [[]]),
+            worker(Epmd.Node, [[]]),
         ]
         supervise(children, strategy: :one_for_all)
     end
