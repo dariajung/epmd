@@ -12,7 +12,9 @@ defmodule Epmd.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger], mod: {Epmd, []}]
+    # EPMD listens on Port 4369 as a default.
+    [env: [port: 4369]]
   end
 
   # Dependencies can be Hex packages:

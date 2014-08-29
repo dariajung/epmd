@@ -1,2 +1,0 @@
-defmodule Epmd do
-end
