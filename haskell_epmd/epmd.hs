@@ -3,8 +3,10 @@ module EPMD where
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as BC
 import qualified Data.Char as C
+import qualified Data.ByteString.Lazy as BL
 import Data.Word
 import Network
+import Data.Binary
 
 data MessageId = MessageId {
     num :: Int
@@ -37,4 +39,4 @@ data NodeInfo = NodeInfo {
 } deriving (Show)
 
 -- sends a message to EPMD when node is started
--- alive2_req 
+compose_ALIVE2_REQ 
